@@ -1,10 +1,23 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function NavBar() {
     const [isUponHero, setIsUponHero] = useState(true); // true = nav is above hero section
+    const [isTop, setIsTop] = useState(true);
     const navRef = useRef<HTMLDivElement>(null);
+
+    const navItems = [
+        {
+            name: "Pourquoi nous",
+            href: "#whyus",
+        },
+        {
+            name: "Comment ça fonctionne",
+            href: "#howitworks",
+        },
+    ]
 
     useEffect(() => {
         const handleScroll = () => {
@@ -12,12 +25,16 @@ export default function NavBar() {
             const heroHeight = window.innerHeight;
             const navHeight = navRef.current?.offsetHeight || 60;
 
-            // Si le scroll dépasse la hauteur du hero moins la hauteur du nav
-            // alors le nav n'est plus au-dessus du hero
             if (window.scrollY > heroHeight - navHeight - 20) {
                 setIsUponHero(false);
             } else {
                 setIsUponHero(true);
+            }
+
+            if (window.scrollY > navHeight - 20) {
+                setIsTop(false);
+            } else {
+                setIsTop(true);
             }
         };
 
@@ -28,6 +45,49 @@ export default function NavBar() {
             window.removeEventListener("scroll", handleScroll);
         };
     }, []);
+
+    // Variants pour l'animation du logo (simple fade)
+    const logoVariants = {
+        hidden: {
+            opacity: 0
+        },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.25,
+                ease: "easeOut"
+            }
+        },
+        exit: {
+            opacity: 0,
+            transition: {
+                duration: 0.15,
+                ease: "easeIn"
+            }
+        }
+    };
+
+    // Variants pour l'animation du bouton Contact (simple fade)
+    const contactVariants = {
+        hidden: {
+            opacity: 0
+        },
+        visible: {
+            opacity: 1,
+            transition: {
+                duration: 0.25,
+                ease: "easeOut"
+            }
+        },
+        exit: {
+            opacity: 0,
+            transition: {
+                duration: 0.15,
+                ease: "easeIn"
+            }
+        }
+    };
+
     return (
         <>
             <div className="absolute flex items-center justify-between w-full top-5 z-26 px-5 md:px-12 lg:px-24 xl:px-32">
@@ -44,7 +104,58 @@ export default function NavBar() {
                 </div>
             </div>
             <nav ref={navRef} className="fixed w-full flex items-center justify-center top-5 z-25">
-                <div className={`min-w-120 min-h-12 ${!isUponHero ? "backdrop-blur-sm" : "bg-white/90"} rounded-2xl shadow-2xl border-r-2 border-b-3 flex items-center justify-evenly`}></div>
+                <motion.div
+                    layout // Active l'animation automatique lors du changement de taille
+                    className={`min-h-12 ${!isUponHero ? "backdrop-blur-sm" : "bg-white/90"} rounded-2xl shadow-2xl border-r-2 border-b-3 flex items-center justify-evenly px-5 gap-2 md:gap-4 lg:gap-6 xl:gap-8`}
+                    transition={{
+                        layout: {
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 30
+                        }
+                    }}
+                >
+                    <AnimatePresence mode="popLayout">
+                        {!isTop && (
+                            <motion.div
+                                key="logo"
+                                className="w-10 h-10 rounded-full flex-shrink-0"
+                                variants={logoVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                            >
+                                <Image src="/logo/logo_transp.png" alt="Filantrope" width={100} height={100} className="object-cover w-full h-full" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                    {navItems.map((item, index) => (
+                        <a
+                            key={index}
+                            href={item.href}
+                            className="text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer"
+                        >
+                            {item.name}
+                        </a>
+                    ))}
+
+                    <AnimatePresence mode="popLayout">
+                        {!isTop && (
+                            <motion.a
+                                key="contact"
+                                href="#contact"
+                                className="text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer flex-shrink-0"
+                                variants={contactVariants}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exit"
+                            >
+                                Contact
+                            </motion.a>
+                        )}
+                    </AnimatePresence>
+                </motion.div>
             </nav>
         </>
     )
