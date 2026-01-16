@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --primary: #DB8FA3ff;
-  --secondary: #A65DADff;
+  --primary: #A65DADff;
+  --secondary: #DB8FA3ff;
   --tertiary: #3964B5ff;
   --quaternary: #8AA7B7ff;
   --quinary: #FEB44Eff;
@@ -93,8 +93,8 @@
 }
 
 .dark {
-  --primary: #E4A5B5ff;
-  --secondary: #C080C9ff;
+  --primary: #C080C9ff;
+  --secondary: #E4A5B5ff;
   --tertiary: #5A82D4ff;
   --quaternary: #A5C0CEff;
   --quinary: #FFC56Dff;
