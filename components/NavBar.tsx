@@ -55,14 +55,14 @@ export default function NavBar() {
             opacity: 1,
             transition: {
                 duration: 0.25,
-                ease: "easeOut"
+                ease: "easeOut" as const
             }
         },
         exit: {
             opacity: 0,
             transition: {
                 duration: 0.15,
-                ease: "easeIn"
+                ease: "easeIn" as const
             }
         }
     };
@@ -76,14 +76,14 @@ export default function NavBar() {
             opacity: 1,
             transition: {
                 duration: 0.25,
-                ease: "easeOut"
+                ease: "easeOut" as const
             }
         },
         exit: {
             opacity: 0,
             transition: {
                 duration: 0.15,
-                ease: "easeIn"
+                ease: "easeIn" as const
             }
         }
     };
@@ -119,7 +119,7 @@ export default function NavBar() {
                         {!isTop && (
                             <motion.div
                                 key="logo"
-                                className="w-10 h-10 rounded-full flex-shrink-0"
+                                className="w-10 h-10 rounded-full shrink-0"
                                 variants={logoVariants}
                                 initial="hidden"
                                 animate="visible"
@@ -145,7 +145,7 @@ export default function NavBar() {
                             <motion.a
                                 key="contact"
                                 href="#contact"
-                                className="text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer flex-shrink-0"
+                                className="text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer shrink-0"
                                 variants={contactVariants}
                                 initial="hidden"
                                 animate="visible"
