@@ -65,9 +65,9 @@ export const metadata: Metadata = {
     description: "Simplifiez la vie de vos usagers avec nos tickets virtuels et notifications mobiles.",
     images: ['/logo/logo.png'],
   },
-  icons: {
-    icon: '/logo/logo.png',
-  }
+  // icons: {
+  //   icon: '/logo/logo.png',
+  // }
 };
 
 export default function RootLayout({
