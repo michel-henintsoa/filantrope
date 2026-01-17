@@ -75,7 +75,7 @@ export default function Third() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5 }}
-                        viewport={{ once: false }}
+                        viewport={{ once: true }}
                         className="inline-block"
                     >
                         <h2 className="text-3xl md:text-5xl font-bold mb-4">
@@ -87,7 +87,7 @@ export default function Third() {
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
-                        viewport={{ once: false }}
+                        viewport={{ once: true }}
                         className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto"
                     >
                         Connectez votre établissement à vos usagers grâce à une technologie fluide et intuitive.
@@ -100,7 +100,7 @@ export default function Third() {
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: false, amount: 0.2 }}
+                        viewport={{ once: true, amount: 0.2 }}
                         className="lg:col-span-5 flex flex-col gap-6"
                     >
                         <motion.div variants={itemVariants} className="bg-white2 p-6 border border-b-[3px] border-r-2 border-primary/10">
@@ -116,11 +116,9 @@ export default function Third() {
 
                             <div className="space-y-6">
                                 {establishmentFeatures.map((feature, idx) => (
-                                    <motion.div
+                                    <div
                                         key={idx}
-                                        variants={itemVariants}
-                                        whileHover={{ x: 5 }}
-                                        className="flex gap-4 p-4 bg-card rounded-2xl border border-b-[3px] border-r-2 border-border shadow-sm hover:shadow-md transition-all"
+                                        className="flex gap-4 p-4 bg-card rounded-2xl border border-b-[3px] border-r-2 border-border shadow-sm hover:shadow-md hover:translate-x-1 transition-all duration-200"
                                     >
                                         <div className="mt-1">
                                             <feature.icon className="w-6 h-6 text-primary" />
@@ -129,7 +127,7 @@ export default function Third() {
                                             <h4 className="font-semibold text-lg mb-1">{feature.title}</h4>
                                             <p className="text-sm text-muted-foreground">{feature.desc}</p>
                                         </div>
-                                    </motion.div>
+                                    </div>
                                 ))}
                             </div>
                         </motion.div>
@@ -140,7 +138,7 @@ export default function Third() {
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: false, amount: 0.2 }}
+                        viewport={{ once: true, amount: 0.2 }}
                         className="lg:col-span-7"
                     >
                         <motion.div variants={itemVariants} className="mb-8 flex items-center gap-3">
@@ -155,18 +153,16 @@ export default function Third() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {userFeatures.map((feature, idx) => (
-                                <motion.div
+                                <div
                                     key={idx}
-                                    variants={itemVariants}
-                                    whileHover={{ y: -5, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.1)" }}
-                                    className={`p-4 sm:p-6 bg-card rounded-2xl border border-b-[3px] border-r-2 border-border hover:border-secondary/30 transition-all duration-300 group cursor-pointer ${idx === 2 ? 'sm:col-span-2 bg-linear-to-r from-card to-secondary/5' : ''}`}
+                                    className={`p-4 sm:p-6 bg-card rounded-2xl border border-b-[3px] border-r-2 border-border hover:border-secondary/30 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group cursor-pointer ${idx === 2 ? 'sm:col-span-2 bg-linear-to-r from-card to-secondary/5' : ''}`}
                                 >
                                     <div className="mb-2 p-1 w-fit rounded-xl group-hover:bg-secondary/10 transition-colors duration-400">
                                         <feature.icon className="w-6 h-6 text-secondary" />
                                     </div>
                                     <h4 className="font-semibold text-lg mb-2">{feature.title}</h4>
                                     <p className="text-sm text-muted-foreground">{feature.desc}</p>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     </motion.div>

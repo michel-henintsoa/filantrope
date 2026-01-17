@@ -98,7 +98,7 @@ export default function Second() {
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     variants={imageVariants}
                     style={{ y: imageY }}
                     className="hidden md:flex items-center justify-center relative"
@@ -124,7 +124,7 @@ export default function Second() {
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: false, amount: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     variants={containerVariants}
                     className="flex flex-col items-start justify-center"
                 >
@@ -158,19 +158,11 @@ export default function Second() {
                     </motion.p>
 
                     {/* Features Grid */}
-                    <motion.div
-                        variants={itemVariants}
-                        className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full"
-                    >
-                        {features.map((feature, index) => (
-                            <motion.div
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
+                        {features.map((feature) => (
+                            <div
                                 key={feature.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: false }}
-                                transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                                whileHover={{ scale: 1.02, y: -2 }}
-                                className="group p-3 sm:p-4 rounded-xl bg-card border border-b-[3px] border-r-2 border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                                className="group p-3 sm:p-4 rounded-xl bg-card border border-b-[3px] border-r-2 border-border hover:border-primary/30 hover:shadow-lg hover:scale-[1.02] hover:-translate-y-0.5 transition-all duration-200"
                             >
                                 <div className="flex items-center gap-3 mb-2">
                                     <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
@@ -179,9 +171,9 @@ export default function Second() {
                                     <h3 className="font-semibold text-sm">{feature.title}</h3>
                                 </div>
                                 <p className="text-xs text-muted-foreground">{feature.desc}</p>
-                            </motion.div>
+                            </div>
                         ))}
-                    </motion.div>
+                    </div>
                 </motion.div>
             </div>
         </section>
