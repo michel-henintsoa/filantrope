@@ -34,7 +34,7 @@ export default function NavBar() {
     }, []);
 
     useEffect(() => {
-        const sectionIds = navItems.map(item => item.href.replace("#", ""));
+        const sectionIds = [...navItems.map(item => item.href.replace("#", "")), "contact"];
 
         const handleScroll = () => {
             const heroHeight = window.innerHeight;
@@ -54,7 +54,11 @@ export default function NavBar() {
             }
 
             // Detect active section based on scroll position
-            if (window.scrollY < heroHeight - navHeight - 20) {
+            // Detect active section based on scroll position
+            if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
+                // At the bottom of the page, explicitly set contact as active
+                setActiveSection("contact");
+            } else if (window.scrollY < heroHeight - navHeight - 20) {
                 // In hero section
                 setActiveSection(null);
             } else {
@@ -125,7 +129,16 @@ export default function NavBar() {
                 </div>
 
                 {/* Desktop Contact Button */}
-                <div className="hidden md:flex relative items-center justify-center cursor-pointer py-1 px-5 rounded-xl border-b-2 bg-primary hover:scale-102 active:scale-98 active:bg-primary/95 transition-all duration-200 pointer-events-auto">
+                <div
+                    onClick={(e) => {
+                        e.preventDefault();
+                        const element = document.getElementById("contact");
+                        if (element) {
+                            element.scrollIntoView({ behavior: "smooth" });
+                        }
+                    }}
+                    className="hidden md:flex relative items-center justify-center cursor-pointer py-1 px-5 rounded-xl border-b-2 bg-primary hover:scale-102 active:scale-98 active:bg-primary/95 transition-all duration-200 pointer-events-auto"
+                >
                     <span className="text-lg tracking-wide font-semibold text-white">Contact</span>
                 </div>
 
@@ -198,13 +211,26 @@ export default function NavBar() {
                             <motion.a
                                 key="contact"
                                 href="#contact"
-                                className="text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer shrink-0"
+                                onClick={(e) => handleSmoothScroll(e, "#contact")}
+                                className="relative text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer shrink-0 py-2"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 0.15 }}
                             >
                                 Contact
+                                {activeSection === "contact" && (
+                                    <motion.span
+                                        layoutId="activeIndicator"
+                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                        initial={false}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 500,
+                                            damping: 35
+                                        }}
+                                    />
+                                )}
                             </motion.a>
                         )}
                     </AnimatePresence>
@@ -271,8 +297,14 @@ export default function NavBar() {
                             <div className="mt-auto p-5 border-t border-border">
                                 <a
                                     href="#contact"
-                                    onClick={handleNavClick}
-                                    className="block w-full text-center py-3 px-5 rounded-xl bg-primary text-white font-semibold hover:bg-primary/90 transition-colors"
+                                    onClick={(e) => {
+                                        handleSmoothScroll(e, "#contact");
+                                        handleNavClick();
+                                    }}
+                                    className={`block w-full text-center py-3 px-5 rounded-xl font-semibold transition-all duration-200 ${activeSection === "contact"
+                                        ? "bg-primary text-white shadow-lg shadow-primary/25 scale-[1.02]"
+                                        : "bg-primary text-white hover:bg-primary/90"
+                                        }`}
                                 >
                                     Contact
                                 </a>
