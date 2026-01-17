@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const images = [
     "/images/1.jpeg",
@@ -14,6 +16,7 @@ const images = [
 
 export default function HeroSection() {
     const [currentImage, setCurrentImage] = useState(0);
+    const router = useRouter();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -21,6 +24,18 @@ export default function HeroSection() {
         }, 6000);
         return () => clearInterval(interval);
     }, []);
+
+    const openWhatsApp = (phone = "24176501211") => {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            // Force mobile app opening
+            window.location.href = `whatsapp://send?phone=${phone}`;
+        } else {
+            // Open WhatsApp Web on Desktop
+            window.open(`https://web.whatsapp.com/send?phone=${phone}`, "_blank");
+        }
+    };
 
     return (
         <section className="relative h-screen w-full overflow-hidden">
@@ -75,14 +90,14 @@ export default function HeroSection() {
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col gap-4 sm:flex-row">
-                            <button className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-primary to-secondary px-8 py-3 font-semibold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/30">
+                            <button
+                                className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-primary to-secondary px-8 py-3 font-semibold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/30 cursor-pointer"
+                                onClick={() => openWhatsApp()}
+                            >
                                 <span className="relative z-10">
                                     Demandez votre Audit Accueil Gratuit
                                 </span>
                                 <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-secondary to-primary transition-transform duration-300 group-hover:translate-x-0" />
-                            </button>
-                            <button className="rounded-xl border-2 border-white/30 bg-white/10 px-8 py-3 font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/50 hover:bg-white/20">
-                                En savoir plus
                             </button>
                         </div>
 
