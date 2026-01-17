@@ -160,7 +160,7 @@ export default function Second() {
                     {/* Features Grid */}
                     <motion.div
                         variants={itemVariants}
-                        className="grid grid-cols-2 gap-4 w-full"
+                        className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full"
                     >
                         {features.map((feature, index) => (
                             <motion.div
@@ -170,7 +170,7 @@ export default function Second() {
                                 viewport={{ once: true }}
                                 transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
                                 whileHover={{ scale: 1.02, y: -2 }}
-                                className="group p-4 rounded-xl bg-card border border-b-[3px] border-r-2 border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                                className="group p-3 sm:p-4 rounded-xl bg-card border border-b-[3px] border-r-2 border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
                             >
                                 <div className="flex items-center gap-3 mb-2">
                                     <div className="p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">

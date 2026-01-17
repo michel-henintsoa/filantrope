@@ -153,13 +153,13 @@ export default function Third() {
                             </div>
                         </motion.div>
 
-                        <div className="grid md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {userFeatures.map((feature, idx) => (
                                 <motion.div
                                     key={idx}
                                     variants={itemVariants}
                                     whileHover={{ y: -5, boxShadow: "0 10px 30px -10px rgba(0,0,0,0.1)" }}
-                                    className={`p-6 bg-card rounded-2xl border border-b-[3px] border-r-2 border-border hover:border-secondary/30 transition-all duration-300 group cursor-pointer ${idx === 2 ? 'md:col-span-2 bg-linear-to-r from-card to-secondary/5' : ''}`}
+                                    className={`p-4 sm:p-6 bg-card rounded-2xl border border-b-[3px] border-r-2 border-border hover:border-secondary/30 transition-all duration-300 group cursor-pointer ${idx === 2 ? 'sm:col-span-2 bg-linear-to-r from-card to-secondary/5' : ''}`}
                                 >
                                     <div className="mb-2 p-1 w-fit rounded-xl group-hover:bg-secondary/10 transition-colors duration-400">
                                         <feature.icon className="w-6 h-6 text-secondary" />

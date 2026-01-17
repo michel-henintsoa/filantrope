@@ -102,21 +102,21 @@ export default function HeroSection() {
                         </div>
 
                         {/* Stats */}
-                        <div className="mt-8 grid grid-cols-3 gap-6 border-t border-white/20 pt-4">
+                        <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-6 border-t border-white/20 pt-4">
                             <div>
-                                <p className="text-3xl font-bold text-quinary md:text-4xl">
+                                <p className="text-2xl sm:text-3xl font-bold text-quinary md:text-4xl">
                                     0
                                 </p>
                                 <p className="text-sm text-white/70">Borne traditionnelle</p>
                             </div>
                             <div>
-                                <p className="text-3xl font-bold text-senary md:text-4xl">
+                                <p className="text-2xl sm:text-3xl font-bold text-senary md:text-4xl">
                                     100%
                                 </p>
                                 <p className="text-sm text-white/70">Mobile & Digital</p>
                             </div>
                             <div>
-                                <p className="text-3xl font-bold text-secondary md:text-4xl">
+                                <p className="text-2xl sm:text-3xl font-bold text-secondary md:text-4xl">
                                     ∞
                                 </p>
                                 <p className="text-sm text-white/70">Files personnalisables</p>
@@ -133,8 +133,8 @@ export default function HeroSection() {
                         key={index}
                         onClick={() => setCurrentImage(index)}
                         className={`h-2 rounded-full transition-all duration-300 ${index === currentImage
-                                ? "w-8 bg-quinary"
-                                : "w-2 bg-white/50 hover:bg-white/70 cursor-pointer"
+                            ? "w-8 bg-quinary"
+                            : "w-2 bg-white/50 hover:bg-white/70 cursor-pointer"
                             }`}
                         aria-label={`Aller à l'image ${index + 1}`}
                     />
