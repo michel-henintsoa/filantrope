@@ -102,7 +102,7 @@ export default function HeroSection() {
                         </div>
 
                         {/* Stats */}
-                        <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-6 border-t border-white/20 pt-4">
+                        <div className="mt-8 mb-5 md:mb-0 grid grid-cols-3 gap-3 sm:gap-6 border-t border-white/20 pt-4">
                             <div>
                                 <p className="text-2xl sm:text-3xl font-bold text-quinary md:text-4xl">
                                     0
@@ -127,7 +127,7 @@ export default function HeroSection() {
             </div>
 
             {/* Image Indicators */}
-            <div className="absolute bottom-8 right-0 z-10 flex -translate-x-1/2 gap-2">
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:right-12 md:translate-x-0 z-10 flex gap-2">
                 {images.map((_, index) => (
                     <button
                         key={index}

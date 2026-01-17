@@ -16,7 +16,7 @@ export default function Contact() {
             <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-quinary/10 rounded-full blur-2xl" />
 
             {/* Main content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 md:px-12 lg:px-16">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 py-10 md:px-12 lg:px-16">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Left side - CTA */}
                     <div className="space-y-6">
@@ -36,7 +36,7 @@ export default function Contact() {
                         {/* Phone */}
                         <a
                             href="tel:+24176501211"
-                            className="flex items-center gap-4 p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 group"
+                            className="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 group"
                         >
                             <div className="p-3 rounded-lg bg-quinary/20 group-hover:bg-quinary/30 transition-colors">
                                 <Phone className="w-6 h-6 text-quinary" />
@@ -50,7 +50,7 @@ export default function Contact() {
                         {/* Email */}
                         <a
                             href="mailto:contact@filantrope.tech"
-                            className="flex items-center gap-4 p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 group"
+                            className="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 group"
                         >
                             <div className="p-3 rounded-lg bg-senary/20 group-hover:bg-senary/30 transition-colors">
                                 <Mail className="w-6 h-6 text-senary" />
@@ -66,7 +66,7 @@ export default function Contact() {
                             href="https://www.filantrope.tech"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-4 p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 group"
+                            className="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 hover:scale-[1.02] transition-all duration-300 group"
                         >
                             <div className="p-3 rounded-lg bg-secondary/20 group-hover:bg-secondary/30 transition-colors">
                                 <Globe className="w-6 h-6 text-secondary" />
