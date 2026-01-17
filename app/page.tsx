@@ -1,5 +1,6 @@
 import HeroSection from "@/components/parts/HeroSection";
 import Second from "@/components/parts/Second";
+import Third from "@/components/parts/Third";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <HeroSection />
       {/* <HeroSection /> */}
       <Second />
+      <Third />
     </main>
   );
 }
