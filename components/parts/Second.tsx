@@ -107,7 +107,7 @@ export default function Second() {
                     <div className="absolute inset-4 border-2 border-primary/20 rounded-3xl -rotate-3" />
                     <div className="absolute inset-4 border-2 border-secondary/20 rounded-3xl rotate-3" />
 
-                    <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                    <div className="relative overflow-hidden shadow-2xl">
                         <Image
                             src="/images/5.jpeg"
                             alt="Filantrope en action"
