@@ -57,8 +57,8 @@ export default function HeroSection() {
                     </div>
                 ))}
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
+                <div className="absolute inset-0 bg-linear-to-r from-black/70 via-black/50 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-black/30" />
             </div>
 
             {/* Content */}
@@ -76,7 +76,7 @@ export default function HeroSection() {
                         {/* Main Title */}
                         <h1 className="mb-6 text-2xl font-bold leading-tight text-white md:text-4xl lg:text-5xl">
                             Prenez votre temps.{" "}
-                            <span className="bg-gradient-to-r from-quinary via-senary to-secondary bg-clip-text text-transparent">
+                            <span className="bg-linear-to-r from-quinary via-senary to-secondary bg-clip-text text-transparent">
                                 Rendez l&apos;attente plus fun !
                             </span>
                         </h1>
@@ -91,13 +91,13 @@ export default function HeroSection() {
                         {/* CTA Buttons */}
                         <div className="flex flex-col gap-4 sm:flex-row">
                             <button
-                                className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-primary to-secondary px-8 py-3 font-semibold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/30 cursor-pointer"
+                                className="group relative overflow-hidden rounded-xl bg-linear-to-r from-primary to-secondary px-8 py-3 font-semibold text-white shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/30 cursor-pointer"
                                 onClick={() => openWhatsApp()}
                             >
                                 <span className="relative z-10">
                                     Demandez votre Audit Accueil Gratuit
                                 </span>
-                                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-secondary to-primary transition-transform duration-300 group-hover:translate-x-0" />
+                                <div className="absolute inset-0 -translate-x-full bg-linear-to-r from-secondary to-primary transition-transform duration-300 group-hover:translate-x-0" />
                             </button>
                         </div>
 

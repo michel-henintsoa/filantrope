@@ -9,7 +9,7 @@ export default function Contact() {
     };
 
     return (
-        <footer id="contact" className="relative bg-gradient-to-br from-tertiary via-tertiary to-primary/90 text-white overflow-hidden">
+        <footer id="contact" className="relative bg-linear-to-br from-tertiary via-tertiary to-primary/90 text-white overflow-hidden">
             {/* Decorative elements */}
             <div className="absolute top-0 left-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
             <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
@@ -22,7 +22,7 @@ export default function Contact() {
                     <div className="space-y-6">
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                             Prêt à moderniser{" "}
-                            <span className="bg-gradient-to-r from-quinary via-senary to-secondary bg-clip-text text-transparent">
+                            <span className="bg-linear-to-r from-quinary via-senary to-secondary bg-clip-text text-transparent">
                                 votre accueil ?
                             </span>
                         </h2>

@@ -90,7 +90,7 @@ export default function Second() {
 
             {/* Grand cercle décoratif - centre en haut à droite, à l'extérieur */}
             <div
-                className="absolute -top-[300px] -right-[300px] w-[1200px] h-[1200px] rounded-full bg-gradient-to-br from-primary/10 to-transparent pointer-events-none"
+                className="absolute -top-[300px] -right-[300px] w-[1200px] h-[1200px] rounded-full bg-linear-to-br from-primary/10 to-transparent pointer-events-none"
             />
 
             <div className="relative z-10 max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -116,7 +116,7 @@ export default function Second() {
                             className="w-full h-full object-cover"
                         />
                         {/* Gradient overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+                        <div className="absolute inset-0 bg-linear-to-t from-primary/20 to-transparent" />
                     </div>
                 </motion.div>
 
@@ -140,7 +140,7 @@ export default function Second() {
                         className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
                     >
                         Pourquoi choisir{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+                        <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-secondary">
                             Filantrope
                         </span>{" "}
                         ?
