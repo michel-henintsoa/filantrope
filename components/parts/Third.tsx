@@ -66,7 +66,7 @@ const userFeatures = [
 
 export default function Third() {
     return (
-        <section id="features" className="relative min-h-screen w-full py-20 px-6 md:px-12 lg:px-16 bg-muted/30 overflow-hidden">
+        <section id="howitworks" className="relative min-h-screen w-full py-20 px-6 md:px-12 lg:px-16 bg-muted/30 overflow-hidden">
             <div className="absolute top-10 -left-50 -translate-y-1/2 h-75 w-75 md:h-200 md:w-200 bg-linear-to-r from-primary/5 to-tertiary/5 mx-auto rounded-full pointer-events-none" />
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Section Header */}

@@ -38,7 +38,7 @@ export default function HeroSection() {
     };
 
     return (
-        <section className="relative h-screen w-full overflow-hidden">
+        <section id="hero" className="relative h-screen w-full overflow-hidden">
             {/* Background Image Carousel */}
             <div className="absolute inset-0 z-0">
                 {images.map((src, index) => (

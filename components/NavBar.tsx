@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -8,6 +8,7 @@ export default function NavBar() {
     const [isUponHero, setIsUponHero] = useState(true);
     const [isTop, setIsTop] = useState(true);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState<string | null>(null);
     const navRef = useRef<HTMLDivElement>(null);
 
     const navItems = [
@@ -15,10 +16,30 @@ export default function NavBar() {
         { name: "Comment ça fonctionne", href: "#howitworks" },
     ];
 
+    // Smooth scroll handler
+    const handleSmoothScroll = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        e.preventDefault();
+        const targetId = href.replace("#", "");
+        const element = document.getElementById(targetId);
+        if (element) {
+            const navHeight = navRef.current?.offsetHeight || 60;
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            const offsetPosition = elementPosition - navHeight - 20;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+    }, []);
+
     useEffect(() => {
+        const sectionIds = navItems.map(item => item.href.replace("#", ""));
+
         const handleScroll = () => {
             const heroHeight = window.innerHeight;
             const navHeight = navRef.current?.offsetHeight || 60;
+            const scrollPosition = window.scrollY + navHeight + 100; // Add offset for better detection
 
             if (window.scrollY > heroHeight - navHeight - 20) {
                 setIsUponHero(false);
@@ -30,6 +51,29 @@ export default function NavBar() {
                 setIsTop(false);
             } else {
                 setIsTop(true);
+            }
+
+            // Detect active section based on scroll position
+            if (window.scrollY < heroHeight - navHeight - 20) {
+                // In hero section
+                setActiveSection(null);
+            } else {
+                // Check which section is currently visible
+                let currentSection: string | null = null;
+
+                for (const sectionId of sectionIds) {
+                    const element = document.getElementById(sectionId);
+                    if (element) {
+                        const { top } = element.getBoundingClientRect();
+                        const sectionTop = top + window.scrollY;
+
+                        if (scrollPosition >= sectionTop) {
+                            currentSection = sectionId;
+                        }
+                    }
+                }
+
+                setActiveSection(currentSection);
             }
         };
 
@@ -67,8 +111,11 @@ export default function NavBar() {
     return (
         <>
             {/* Top Bar - Logo & Contact */}
-            <div className="absolute flex items-center justify-between w-full top-5 z-30 px-5 md:px-12 lg:px-24 xl:px-32 pointer-events-none">
-                <div className="flex items-end justify-center cursor-pointer px-3 rounded-xl border-b-2 pointer-events-auto">
+            <div className="fixed md:absolute flex items-center justify-between w-full top-5 z-30 px-5 md:px-12 lg:px-24 xl:px-32 pointer-events-none">
+                <div
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    className="flex items-end justify-center cursor-pointer px-3 rounded-xl border-b-2 pointer-events-auto"
+                >
                     <div className="w-10 h-10 rounded-full">
                         <Image src="/logo/logo_transp.png" alt="Filantrope" width={100} height={100} className="object-cover w-full h-full" />
                     </div>
@@ -101,32 +148,50 @@ export default function NavBar() {
                 <motion.div
                     layout
                     className={`min-h-12 ${!isUponHero ? "backdrop-blur-sm" : "bg-white/90"} rounded-2xl shadow-2xl border-r-2 border-b-3 flex items-center justify-evenly px-5 gap-2 md:gap-4 lg:gap-6 xl:gap-8`}
-                    transition={{ layout: { type: "spring", stiffness: 300, damping: 30 } }}
+                    transition={{ layout: { type: "spring", stiffness: 400, damping: 35 } }}
                 >
                     <AnimatePresence mode="popLayout">
                         {!isTop && (
                             <motion.div
                                 key="logo"
-                                className="w-10 h-10 rounded-full shrink-0"
-                                variants={logoVariants}
-                                initial="hidden"
-                                animate="visible"
-                                exit="exit"
+                                layout
+                                className="w-10 h-10 rounded-full shrink-0 cursor-pointer"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.8 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                             >
                                 <Image src="/logo/logo_transp.png" alt="Filantrope" width={100} height={100} className="object-cover w-full h-full" />
                             </motion.div>
                         )}
                     </AnimatePresence>
 
-                    {navItems.map((item, index) => (
-                        <a
-                            key={index}
-                            href={item.href}
-                            className="text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer whitespace-nowrap"
-                        >
-                            {item.name}
-                        </a>
-                    ))}
+                    {navItems.map((item, index) => {
+                        const isActive = activeSection === item.href.replace("#", "");
+                        return (
+                            <a
+                                key={index}
+                                href={item.href}
+                                onClick={(e) => handleSmoothScroll(e, item.href)}
+                                className="relative text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer whitespace-nowrap py-2"
+                            >
+                                {item.name}
+                                {isActive && (
+                                    <motion.span
+                                        layoutId="activeIndicator"
+                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                        initial={false}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 500,
+                                            damping: 35
+                                        }}
+                                    />
+                                )}
+                            </a>
+                        );
+                    })}
 
                     <AnimatePresence mode="popLayout">
                         {!isTop && (
@@ -134,10 +199,10 @@ export default function NavBar() {
                                 key="contact"
                                 href="#contact"
                                 className="text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer shrink-0"
-                                variants={contactVariants}
-                                initial="hidden"
-                                animate="visible"
-                                exit="exit"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.15 }}
                             >
                                 Contact
                             </motion.a>
@@ -181,16 +246,25 @@ export default function NavBar() {
 
                             {/* Nav Links */}
                             <div className="flex flex-col p-5 gap-4">
-                                {navItems.map((item, index) => (
-                                    <a
-                                        key={index}
-                                        href={item.href}
-                                        onClick={handleNavClick}
-                                        className="text-lg font-semibold text-tertiary hover:text-primary py-3 px-4 rounded-xl hover:bg-muted/50 transition-all duration-200"
-                                    >
-                                        {item.name}
-                                    </a>
-                                ))}
+                                {navItems.map((item, index) => {
+                                    const isActive = activeSection === item.href.replace("#", "");
+                                    return (
+                                        <a
+                                            key={index}
+                                            href={item.href}
+                                            onClick={(e) => {
+                                                handleSmoothScroll(e, item.href);
+                                                handleNavClick();
+                                            }}
+                                            className={`relative text-lg font-semibold py-3 px-4 rounded-xl transition-all duration-200 ${isActive
+                                                ? "text-primary bg-primary/10 border-l-4 border-primary"
+                                                : "text-tertiary hover:text-primary hover:bg-muted/50"
+                                                }`}
+                                        >
+                                            {item.name}
+                                        </a>
+                                    );
+                                })}
                             </div>
 
                             {/* Contact Button */}
