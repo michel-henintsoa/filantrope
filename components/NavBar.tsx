@@ -67,8 +67,8 @@ export default function NavBar() {
     return (
         <>
             {/* Top Bar - Logo & Contact */}
-            <div className="absolute flex items-center justify-between w-full top-5 z-30 px-5 md:px-12 lg:px-24 xl:px-32">
-                <div className="flex items-end justify-center cursor-pointer px-3 rounded-xl border-b-2">
+            <div className="absolute flex items-center justify-between w-full top-5 z-30 px-5 md:px-12 lg:px-24 xl:px-32 pointer-events-none">
+                <div className="flex items-end justify-center cursor-pointer px-3 rounded-xl border-b-2 pointer-events-auto">
                     <div className="w-10 h-10 rounded-full">
                         <Image src="/logo/logo_transp.png" alt="Filantrope" width={100} height={100} className="object-cover w-full h-full" />
                     </div>
@@ -78,14 +78,14 @@ export default function NavBar() {
                 </div>
 
                 {/* Desktop Contact Button */}
-                <div className="hidden md:flex relative items-center justify-center cursor-pointer py-1 px-5 rounded-xl border-b-2 bg-primary hover:scale-102 active:scale-98 active:bg-primary/95 transition-all duration-200">
+                <div className="hidden md:flex relative items-center justify-center cursor-pointer py-1 px-5 rounded-xl border-b-2 bg-primary hover:scale-102 active:scale-98 active:bg-primary/95 transition-all duration-200 pointer-events-auto">
                     <span className="text-lg tracking-wide font-semibold text-white">Contact</span>
                 </div>
 
                 {/* Mobile Hamburger Button */}
                 <button
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="md:hidden p-2 rounded-xl bg-white/90 backdrop-blur-sm border border-border shadow-lg"
+                    className="md:hidden p-2 rounded-xl bg-white/90 backdrop-blur-sm border border-border shadow-lg pointer-events-auto"
                     aria-label="Toggle menu"
                 >
                     {isMobileMenuOpen ? (

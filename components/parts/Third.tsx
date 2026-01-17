@@ -75,7 +75,7 @@ export default function Third() {
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.5 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: false }}
                         className="inline-block"
                     >
                         <h2 className="text-3xl md:text-5xl font-bold mb-4">
@@ -87,7 +87,7 @@ export default function Third() {
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: false }}
                         className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto"
                     >
                         Connectez votre établissement à vos usagers grâce à une technologie fluide et intuitive.
@@ -100,7 +100,7 @@ export default function Third() {
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
+                        viewport={{ once: false, amount: 0.2 }}
                         className="lg:col-span-5 flex flex-col gap-6"
                     >
                         <motion.div variants={itemVariants} className="bg-white2 p-6 border border-b-[3px] border-r-2 border-primary/10">
@@ -140,7 +140,7 @@ export default function Third() {
                         variants={containerVariants}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, amount: 0.2 }}
+                        viewport={{ once: false, amount: 0.2 }}
                         className="lg:col-span-7"
                     >
                         <motion.div variants={itemVariants} className="mb-8 flex items-center gap-3">
