@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 
 export default function NavBar() {
     const [isUponHero, setIsUponHero] = useState(true);
@@ -128,18 +128,26 @@ export default function NavBar() {
                     </div>
                 </div>
 
-                {/* Desktop Contact Button */}
-                <div
-                    onClick={(e) => {
-                        e.preventDefault();
-                        const element = document.getElementById("contact");
-                        if (element) {
-                            element.scrollIntoView({ behavior: "smooth" });
-                        }
-                    }}
-                    className="hidden md:flex relative items-center justify-center cursor-pointer py-1 px-5 rounded-xl border-b-2 bg-primary hover:scale-102 active:scale-98 active:bg-primary/95 transition-all duration-200 pointer-events-auto"
-                >
-                    <span className="text-lg tracking-wide font-semibold text-white">Contact</span>
+                {/* Desktop Contact & Login Buttons */}
+                <div className="hidden md:flex items-center gap-3 pointer-events-auto">
+                    <a
+                        href={`${process.env.NEXT_PUBLIC_URL}/login`}
+                        className="flex items-center justify-center cursor-pointer py-1 px-5 rounded-xl border-b-2 bg-white hover:bg-muted hover:scale-102 active:scale-98 transition-all duration-200"
+                    >
+                        <span className="text-lg tracking-wide font-semibold text-tertiary">Login</span>
+                    </a>
+                    <div
+                        onClick={(e) => {
+                            e.preventDefault();
+                            const element = document.getElementById("contact");
+                            if (element) {
+                                element.scrollIntoView({ behavior: "smooth" });
+                            }
+                        }}
+                        className="flex items-center justify-center cursor-pointer py-1 px-5 rounded-xl border-b-2 bg-primary hover:scale-102 active:scale-98 active:bg-primary/95 transition-all duration-200"
+                    >
+                        <span className="text-lg tracking-wide font-semibold text-white">Contact</span>
+                    </div>
                 </div>
 
                 {/* Mobile Hamburger Button */}
@@ -163,22 +171,14 @@ export default function NavBar() {
                     className={`min-h-12 ${!isUponHero ? "backdrop-blur-sm" : "bg-white/90"} rounded-2xl shadow-2xl border-r-2 border-b-3 flex items-center justify-evenly px-5 gap-2 md:gap-4 lg:gap-6 xl:gap-8`}
                     transition={{ layout: { type: "spring", stiffness: 400, damping: 35 } }}
                 >
-                    <AnimatePresence mode="popLayout">
-                        {!isTop && (
-                            <motion.div
-                                key="logo"
-                                layout
-                                className="w-10 h-10 rounded-full shrink-0 cursor-pointer"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.8 }}
-                                transition={{ type: "spring", stiffness: 400, damping: 35 }}
-                                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                            >
-                                <Image src="/logo/logo_transp.png" alt="Filantrope" width={100} height={100} className="object-cover w-full h-full" />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                    {!isTop && (
+                        <div
+                            className="w-10 h-10 rounded-full shrink-0 cursor-pointer transition-opacity duration-200"
+                            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                        >
+                            <Image src="/logo/logo_transp.png" alt="Filantrope" width={100} height={100} className="object-cover w-full h-full" />
+                        </div>
+                    )}
 
                     {navItems.map((item, index) => {
                         const isActive = activeSection === item.href.replace("#", "");
@@ -197,8 +197,8 @@ export default function NavBar() {
                                         initial={false}
                                         transition={{
                                             type: "spring",
-                                            stiffness: 500,
-                                            damping: 35
+                                            stiffness: 380,
+                                            damping: 30
                                         }}
                                     />
                                 )}
@@ -206,34 +206,37 @@ export default function NavBar() {
                         );
                     })}
 
-                    <AnimatePresence mode="popLayout">
-                        {!isTop && (
-                            <motion.a
-                                key="contact"
-                                href="#contact"
-                                onClick={(e) => handleSmoothScroll(e, "#contact")}
-                                className="relative text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer shrink-0 py-2"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.15 }}
-                            >
-                                Contact
-                                {activeSection === "contact" && (
-                                    <motion.span
-                                        layoutId="activeIndicator"
-                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
-                                        initial={false}
-                                        transition={{
-                                            type: "spring",
-                                            stiffness: 500,
-                                            damping: 35
-                                        }}
-                                    />
-                                )}
-                            </motion.a>
-                        )}
-                    </AnimatePresence>
+                    {!isTop && (
+                        <a
+                            href="#contact"
+                            onClick={(e) => handleSmoothScroll(e, "#contact")}
+                            className="relative text-sm font-semibold text-tertiary hover:scale-102 active:scale-98 active:text-tertiary/95 transition-all duration-200 cursor-pointer shrink-0 py-2"
+                        >
+                            Contact
+                            {activeSection === "contact" && (
+                                <motion.span
+                                    layoutId="activeIndicator"
+                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                    initial={false}
+                                    transition={{
+                                        type: "spring",
+                                        stiffness: 380,
+                                        damping: 30
+                                    }}
+                                />
+                            )}
+                        </a>
+                    )}
+
+                    {/* Login Icon Button - appears when scrolled */}
+                    {!isTop && (
+                        <a
+                            href={`${process.env.NEXT_PUBLIC_URL}/login`}
+                            className="flex items-center justify-center w-9 h-9 rounded-full bg-primary hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer shrink-0 ml-2"
+                        >
+                            <User className="w-5 h-5 text-white" />
+                        </a>
+                    )}
                 </motion.div>
             </nav>
 
